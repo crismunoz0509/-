@@ -2343,7 +2343,7 @@ a {
   border: 1px solid #fff;
   border-color: gray #fff #fff gray;
   flex: 1;
-  width: auto;
+  width: 100%;
   overflow: visible;
 }
 
@@ -2396,6 +2396,7 @@ a {
   padding-top: 10px;
   padding-left: 10px;
   padding-right: 10px;
+  display: block;
   overflow: auto;
 }
 
@@ -2467,7 +2468,7 @@ a {
 .game-instructions {
   color: #000;
   padding-top: 10px;
-  font-family: MS Sans Serif, sans-serif;
+  font-family: Source Code Pro, sans-serif;
   font-size: 14px;
 }
 
@@ -2565,7 +2566,7 @@ a {
   display: none;
 }
 
-.frustration, .tag-light, .darkmaze {
+.frustration, .tag-light {
   border: 1px solid #000;
   border-color: silver #000 #000 silver;
   width: 500px;
@@ -2576,7 +2577,7 @@ a {
   left: 320px;
 }
 
-.spotifyreadme {
+.darkmaze, .spotifyreadme {
   border: 1px solid #000;
   border-color: silver #000 #000 silver;
   width: 80%;
@@ -2594,7 +2595,18 @@ a {
   left: 10%;
 }
 
-.omage, .escape-vr, .tidal-rave, .insta-karma {
+.omage {
+  border: 1px solid #000;
+  border-color: silver #000 #000 silver;
+  width: 80%;
+  height: 80%;
+  display: none;
+  position: absolute;
+  top: 10%;
+  left: 10%;
+}
+
+.escape-vr, .tidal-rave, .insta-karma {
   border: 1px solid #000;
   border-color: silver #000 #000 silver;
   width: 500px;
@@ -2692,6 +2704,25 @@ a {
 
 .image {
   position: relative;
+}
+
+.hbd {
+  z-index: 999;
+  background-image: url("https://cdn.prod.website-files.com/671ab87b8fe1f994a08dbb63/67577f9b6c010121c44f7f5e_hbd.gif");
+  background-position: 0 0;
+  background-size: auto;
+  width: 100%;
+  height: 100%;
+  display: none;
+  position: absolute;
+}
+
+.hbd.screensaver {
+  background-image: url("https://cdn.prod.website-files.com/671ab87b8fe1f994a08dbb63/67577f9b6c010121c44f7f5e_hbd.gif");
+}
+
+.bold-text, .bold-text-2, .bold-text-3, .download-me {
+  font-family: Source Code Pro, sans-serif;
 }
 
 @media screen and (max-width: 991px) {
