@@ -1383,6 +1383,118 @@
         return f
     }
     ,
+    S.extend({
+        Deferred: function(e) {
+            var o = [["notify", "progress", S.Callbacks("memory"), S.Callbacks("memory"), 2], ["resolve", "done", S.Callbacks("once memory"), S.Callbacks("once memory"), 0, "resolved"], ["reject", "fail", S.Callbacks("once memory"), S.Callbacks("once memory"), 1, "rejected"]]
+              , i = "pending"
+              , a = {
+                state: function() {
+                    return i
+                },
+                always: function() {
+                    return s.done(arguments).fail(arguments),
+                    this
+                },
+                "catch": function(e) {
+                    return a.then(null, e)
+                },
+                pipe: function() {
+                    var i = arguments;
+                    return S.Deferred(function(r) {
+                        S.each(o, function(e, t) {
+                            var n = m(i[t[4]]) && i[t[4]];
+                            s[t[1]](function() {
+                                var e = n && n.apply(this, arguments);
+                                e && m(e.promise) ? e.promise().progress(r.notify).done(r.resolve).fail(r.reject) : r[t[0] + "With"](this, n ? [e] : arguments)
+                            })
+                        }),
+                        i = null
+                    }).promise()
+                },
+                then: function(t, n, r) {
+                    var u = 0;
+                    function l(i, o, a, s) {
+                        return function() {
+                            var n = this
+                              , r = arguments
+                              , e = function() {
+                                var e, t;
+                                if (!(i < u)) {
+                                    if ((e = a.apply(n, r)) === o.promise())
+                                        throw new TypeError("Thenable self-resolution");
+                                    t = e && ("object" == typeof e || "function" == typeof e) && e.then,
+                                    m(t) ? s ? t.call(e, l(u, o, R, s), l(u, o, M, s)) : (u++,
+                                    t.call(e, l(u, o, R, s), l(u, o, M, s), l(u, o, R, o.notifyWith))) : (a !== R && (n = void 0,
+                                    r = [e]),
+                                    (s || o.resolveWith)(n, r))
+                                }
+                            }
+                              , t = s ? e : function() {
+                                try {
+                                    e()
+                                } catch (e) {
+                                    S.Deferred.exceptionHook && S.Deferred.exceptionHook(e, t.stackTrace),
+                                    u <= i + 1 && (a !== M && (n = void 0,
+                                    r = [e]),
+                                    o.rejectWith(n, r))
+                                }
+                            }
+                            ;
+                            i ? t() : (S.Deferred.getStackHook && (t.stackTrace = S.Deferred.getStackHook()),
+                            C.setTimeout(t))
+                        }
+                    }
+                    return S.Deferred(function(e) {
+                        o[0][3].add(l(0, e, m(r) ? r : R, e.notifyWith)),
+                        o[1][3].add(l(0, e, m(t) ? t : R)),
+                        o[2][3].add(l(0, e, m(n) ? n : M))
+                    }).promise()
+                },
+                promise: function(e) {
+                    return null != e ? S.extend(e, a) : a
+                }
+            }
+              , s = {};
+            return S.each(o, function(e, t) {
+                var n = t[2]
+                  , r = t[5];
+                a[t[1]] = n.add,
+                r && n.add(function() {
+                    i = r
+                }, o[3 - e][2].disable, o[3 - e][3].disable, o[0][2].lock, o[0][3].lock),
+                n.add(t[3].fire),
+                s[t[0]] = function() {
+                    return s[t[0] + "With"](this === s ? void 0 : this, arguments),
+                    this
+                }
+                ,
+                s[t[0] + "With"] = n.fireWith
+            }),
+            a.promise(s),
+            e && e.call(s, s),
+            s
+        },
+        when: function(e) {
+            var n = arguments.length
+              , t = n
+              , r = Array(t)
+              , i = s.call(arguments)
+              , o = S.Deferred()
+              , a = function(t) {
+                return function(e) {
+                    r[t] = this,
+                    i[t] = 1 < arguments.length ? s.call(arguments) : e,
+                    --n || o.resolveWith(r, i)
+                }
+            };
+            if (n <= 1 && (I(e, o.done(a(t)).resolve, o.reject, !n),
+            "pending" === o.state() || m(i[t] && i[t].then)))
+                return o.then();
+            while (t--)
+                I(i[t], a(t), o.reject);
+            return o.promise()
+        }
+    });
     var W = /^(Eval|Internal|Range|Reference|Syntax|Type|URI)Error$/;
     S.Deferred.exceptionHook = function(e, t) {
         C.console && C.console.warn && e && W.test(e.name) && C.console.warn("jQuery.Deferred exception: " + e.message, e.stack, t)
