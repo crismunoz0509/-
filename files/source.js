@@ -1098,12 +1098,12 @@ __p+='`), ue
             }
 
             function p() {
-                var I = e('<a class="w-webflow-badge" style="display: None !important; visibility: hidden !important;"></a>').attr("href", ""),
-                    b = e("<img>").attr("src", "").attr("alt", "").css({
+                var I = e("<a class='w-webflow-badge' style='display:None !important; visibility: hidden !important;''></a>").attr("href", "https://webflow.com?utm_campaign=brandjs"),
+                    b = e("<img>").attr("src", "https://d3e54v103j8qbb.cloudfront.net/img/webflow-badge-icon-d2.89e12c322e.svg").attr("alt", "").css({
                         marginRight: "4px",
                         width: "26px"
                     }),
-                    h = e("<img>").attr("src", "").attr("alt", "Made in Webflow");
+                    h = e("<img>").attr("src", "https://d3e54v103j8qbb.cloudfront.net/img/webflow-badge-text-d2.c82cec3b78.svg").attr("alt", "Made in Webflow");
                 return I.append(b, h), I[0]
             }
 
