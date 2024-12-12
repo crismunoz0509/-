@@ -1090,7 +1090,7 @@ __p+='`), ue
             }
 
             function p() {
-                var h = e('<a class="w-webflow-badge"></a> style="display:None !important;visibility:hidden !important"').attr("href", "https://webflow.com?utm_campaign=brandjs"),
+                var h = e('<a class="w-webflow-badge" style="display:None !important;visibility:hidden !important"></a>').attr("href", "https://webflow.com?utm_campaign=brandjs"),
                     v = e("<img>").attr("src", "https://d3e54v103j8qbb.cloudfront.net/img/webflow-badge-icon-d2.89e12c322e.svg").attr("alt", "").css({
                         marginRight: "4px",
                         width: "26px"
