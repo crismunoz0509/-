@@ -2056,9 +2056,10 @@ textarea.w-input, textarea.w-select {
 
 :root {
   --dark-turquoise: #27ced7;
-  --white: white;
   --black: black;
-  --deep-pink: #e22b93;
+  --deep-pink: red;
+  --color: #bdbdbd;
+  --white: white;
 }
 
 .w-layout-grid {
@@ -2154,9 +2155,12 @@ a {
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-start;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
   display: block;
+  position: absolute;
+  overflow: clip;
 }
 
 .taskbar {
@@ -2165,6 +2169,7 @@ a {
   flex: none;
   justify-content: space-between;
   width: 100%;
+  height: auto;
   margin: 0;
   padding: 2px;
   display: flex;
@@ -2431,7 +2436,7 @@ a {
 }
 
 .song {
-  color: #000;
+  color: var(--black);
   overflow-wrap: normal;
   border-radius: 0;
   margin-bottom: 0;
@@ -2440,6 +2445,27 @@ a {
   padding-left: 15px;
   font-family: Source Code Pro, sans-serif;
   font-size: 13px;
+  font-weight: 400;
+}
+
+.song.favorite {
+  color: var(--deep-pink);
+  text-align: left;
+  -webkit-text-stroke-color: var(--black);
+  border: 1.5px solid #000;
+  border-radius: 3px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-style: italic;
+}
+
+.song.songnote {
+  color: var(--color);
+  text-align: center;
+  text-transform: none;
+  overflow-wrap: normal;
+  font-size: 10px;
+  font-style: italic;
   font-weight: 400;
 }
 
@@ -2580,7 +2606,19 @@ a {
   left: 320px;
 }
 
-.darkmaze, .spotifyreadme {
+.darkmaze {
+  border: 1px solid #000;
+  border-color: silver #000 #000 silver;
+  width: 80%;
+  height: 80%;
+  display: none;
+  position: absolute;
+  top: 10%;
+  left: 10%;
+}
+
+.spotifyreadme {
+  z-index: 999;
   border: 1px solid #000;
   border-color: silver #000 #000 silver;
   width: 80%;
@@ -2621,6 +2659,7 @@ a {
 }
 
 .spotify {
+  z-index: 999;
   border: 1px solid #000;
   border-color: silver #000 #000 silver;
   width: 80%;
@@ -2675,15 +2714,18 @@ a {
 
 .screensaver {
   z-index: 999;
+  box-sizing: content-box;
   background-image: url("https://cdn.prod.website-files.com/671ab87b8fe1f994a08dbb63/671add6bddd64f53929c0be7_dvd-old.gif");
   background-position: 50%;
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-size: cover;
   width: 100%;
-  height: auto;
+  height: 100%;
+  max-height: none;
   display: none;
   position: absolute;
   inset: auto 0 0;
+  overflow: visible;
 }
 
 .grid {
@@ -2709,26 +2751,46 @@ a {
   position: relative;
 }
 
+.treeinfo.spotifyreadme {
+  z-index: 999;
+  display: none;
+}
+
 .hbd {
   z-index: 999;
+  box-sizing: border-box;
+  aspect-ratio: auto;
+  -webkit-text-fill-color: inherit;
+  object-fit: fill;
   background-image: url("https://cdn.prod.website-files.com/671ab87b8fe1f994a08dbb63/67577f9b6c010121c44f7f5e_hbd.gif");
-  background-position: 0 0;
+  background-position: 50% 100%;
   background-size: auto;
+  background-clip: border-box;
   width: 100%;
-  height: auto;
+  height: 100%;
+  max-height: none;
   display: none;
   position: absolute;
-  bottom: 9px;
+  bottom: 0;
   left: 0;
   right: 0;
+  overflow: clip;
 }
 
 .hbd.screensaver {
   background-image: url("https://cdn.prod.website-files.com/671ab87b8fe1f994a08dbb63/67577f9b6c010121c44f7f5e_hbd.gif");
 }
 
+.clickme.darkmaze {
+  z-index: 999;
+}
+
 .bold-text, .bold-text-2, .bold-text-3, .download-me {
   font-family: Source Code Pro, sans-serif;
+}
+
+.souleater.omage {
+  z-index: 999;
 }
 
 @media screen and (max-width: 991px) {
@@ -2743,7 +2805,7 @@ a {
     grid-template-rows: repeat(auto-fit, 12%);
     grid-template-columns: repeat(auto-fit, 12%);
     margin-top: -162px;
-    margin-left: 1%;
+    padding-left: 2%;
     position: static;
   }
 
@@ -2771,7 +2833,7 @@ a {
   }
 
   .spotify {
-    width: 81%;
+    width: 80%;
     height: 80%;
     inset: 10% auto auto 10%;
   }
@@ -2797,6 +2859,15 @@ a {
   .desktop {
     grid-template-rows: repeat(auto-fit, 15%);
     grid-template-columns: repeat(auto-fit, 20%);
+    padding-left: 2%;
+  }
+
+  .win-inner-padding {
+    display: flex;
+  }
+
+  .win-content-inner-frame {
+    display: block;
   }
 
   .playlist {
@@ -2814,16 +2885,21 @@ a {
   }
 
   .spotifyreadme {
-    width: 90%;
-    height: 90%;
-    top: 3%;
-    left: 3%;
+    width: 80%;
+    height: 80%;
+    margin-top: 0%;
+    margin-left: 0%;
+    display: none;
+    top: 10%;
+    left: 10%;
   }
 
   .spotify {
-    width: 90%;
-    height: 90%;
-    inset: 3% auto auto 5%;
+    width: 80%;
+    height: 80%;
+    margin-top: 0%;
+    margin-left: 0%;
+    inset: 10% auto auto 10%;
   }
 
   .recycle-bin {
@@ -2836,6 +2912,18 @@ a {
   .screensaver {
     background-size: 100% 100%;
     width: 100%;
+  }
+
+  .treeinfo.spotifyreadme {
+    width: 80%;
+    height: 80%;
+    display: none;
+    top: 10%;
+    left: 10%;
+  }
+
+  .clickme.darkmaze, .souleater.omage {
+    display: none;
   }
 }
 
@@ -2868,6 +2956,13 @@ a {
     grid-template-columns: repeat(auto-fit, 35%);
     place-items: start center;
     position: static;
+  }
+
+  .win-content-inner-frame {
+    aspect-ratio: auto;
+    object-fit: fill;
+    height: 95.5%;
+    overflow: clip;
   }
 
   .win-title {
@@ -2904,12 +2999,16 @@ a {
   }
 
   .spotifyreadme {
-    left: 5%;
+    width: 80%;
+    height: 80%;
+    top: 10%;
+    left: 10%;
   }
 
   .spotify {
-    height: 90%;
-    inset: 3% auto auto 5%;
+    width: 80%;
+    height: 80%;
+    inset: 10% auto auto 10%;
   }
 
   .screensaver {
@@ -2937,6 +3036,18 @@ a {
 
   .columns-3 {
     width: 100%;
+  }
+
+  .treeinfo.spotifyreadme {
+    width: 80%;
+    height: 80%;
+    top: 10%;
+    left: 10%;
+  }
+
+  .souleater.omage {
+    height: 80%;
+    display: none;
   }
 }
 
