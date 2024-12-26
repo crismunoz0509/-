@@ -2336,6 +2336,10 @@ a {
   display: flex;
 }
 
+.win-top-bar.secert {
+  background-color: #ff2bd5;
+}
+
 .win-action-bar {
   background-color: silver;
   flex: none;
@@ -2344,6 +2348,10 @@ a {
   height: 20px;
   padding-left: 6px;
   display: flex;
+}
+
+.win-action-bar.secret {
+  background-color: #ffbdfd;
 }
 
 .win-content-outer-frame {
@@ -2361,6 +2369,10 @@ a {
   border-color: #000 silver silver #000;
   width: 100%;
   height: 95.5%;
+}
+
+.win-content-inner-frame.secret {
+  background-color: #ffbdfd;
 }
 
 .window-icons {
@@ -2409,8 +2421,16 @@ a {
 }
 
 .picture {
+  margin-left: 0;
+  margin-right: 0;
   display: block;
+  position: static;
   box-shadow: 3px 3px 0 1px #000;
+}
+
+.picture.secret {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .playlist {
@@ -2481,6 +2501,10 @@ a {
   margin-bottom: 6px;
   font-family: Source Code Pro, sans-serif;
   font-size: 18px;
+}
+
+.playlist-name.link {
+  font-size: 14px;
 }
 
 .playlist-description {
@@ -2741,10 +2765,19 @@ a {
   display: block;
 }
 
+.notes.secret {
+  text-align: center;
+}
+
 .note {
   color: #000;
+  text-align: left;
   font-family: Source Code Pro, sans-serif;
   font-size: 18px;
+}
+
+.note.secret {
+  text-align: center;
 }
 
 .image {
@@ -2782,15 +2815,43 @@ a {
 }
 
 .clickme.darkmaze {
-  z-index: 999;
+  z-index: 900;
+  display: none;
 }
 
-.bold-text, .bold-text-2, .bold-text-3, .download-me {
+.bold-text, .bold-text-2, .bold-text-3 {
   font-family: Source Code Pro, sans-serif;
+}
+
+.download-me {
+  font-family: Source Code Pro, sans-serif;
+  font-size: 12px;
 }
 
 .souleater.omage {
   z-index: 999;
+}
+
+.secret.supersecret {
+  z-index: 999;
+  border: 1px solid #000;
+  width: 60%;
+  height: 60%;
+  display: none;
+  position: absolute;
+  top: 15%;
+  left: 20%;
+}
+
+.text-span, .text-span-2, .text-span-3 {
+  color: red;
+}
+
+.text-span-4 {
+  color: red;
+  text-align: center;
+  text-transform: none;
+  font-style: italic;
 }
 
 @media screen and (max-width: 991px) {
@@ -3048,6 +3109,13 @@ a {
   .souleater.omage {
     height: 80%;
     display: none;
+  }
+
+  .secret.supersecret {
+    width: 80%;
+    height: 80%;
+    top: 10%;
+    left: 10%;
   }
 }
 
